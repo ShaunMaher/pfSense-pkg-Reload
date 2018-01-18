@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8" ?>
+ <packagegui>
+  <name></name>
+  <version></version>
+  <title></title>
+  <include_file></include_file>
+  <backup_file></backup_file>
+  <aftersaveredirect></aftersaveredirect>
+  <configpath></configpath>
+  <menu>
+     <name>Reload</name>
+     <section>Services</section>
+     <configfile></configfile>
+     <tooltiptext>Allows an administrator to schedule a configuration rollback</tooltiptext>
+     <url>/pkg_edit.php?xml=pfSense-pkg-Reload.xml&act=edit&id=0</url>
+  </menu>
+  <service>
+     <name>Reload</name>
+     <rcfile></rcfile>
+     <executable></executable>
+  </service>
+  <tabs>
+     <tab>
+        <text></text>
+        <url></url>
+        <active/>
+        <tab_level/>
+     </tab>
+  </tabs>
+  <additional_files_needed>
+     <prefix></prefix>
+     <chmod></chmod>
+     <item></item>
+  </additional_files_needed>
+  <adddeleteeditpagefields>
+     <columnitem>
+        <fielddescr></fielddescr>
+        <fieldname></fieldname>
+     </columnitem>
+  </adddeleteeditpagefields>
+  <fields>
+     <field>
+        <fielddescr></fielddescr>
+        <fieldname></fieldname>
+        <description></description>
+        <size></size>
+        <type></type>
+     </field>
+  </fields>
+  <custom_php_global_functions>      </custom_php_global_functions>
+  <custom_php_install_command>       </custom_php_install_command>
+  <custom_php_deinstall_command>      </custom_php_deinstall_command>
+  <custom_add_php_command>      </custom_add_php_command>
+  <custom_add_php_command_late>      </custom_add_php_command_late>
+  <custom_delete_php_command>      </custom_delete_php_command>
+  <custom_php_resync_config_command> </custom_php_resync_config_command>
+  <start_command> </start_command>
+  <process_kill_command> </process_kill_command>
+ </packagegui>

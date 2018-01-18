@@ -1,0 +1,1 @@
+Allows an administrator to schedule a configuration rollback so that unsafe configurations can be attempted, even if physical access to the device os unavailable.  If a setting is applied that locks the administrator out they need only wait until the scheduled time for the setting change to be rolled back and the device restarted.

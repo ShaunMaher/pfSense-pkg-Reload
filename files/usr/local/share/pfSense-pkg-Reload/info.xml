@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<pfsensepkgs>
+  <package>
+  	<name>Reload</name>
+  	<pkginfolink>https://github.com/ShaunMaher/pfSense-pkg-Reload</pkginfolink>
+  	<descr><![CDATA[Allows an administrator to schedule a configuration rollback so that unsafe configurations can be attempted, even if physical access to the device os unavailable.  If a setting is applied that locks the administrator out they need only wait until the scheduled time for the setting change to be rolled back and the device restarted.]]></descr>
+  	<website>https://github.com/ShaunMaher/pfSense-pkg-Reload</website>
+  	<category>Services</category>
+  	<version>%%PKGVERSION%%</version>
+  	<status>Alpha</status>
+  	<required_version>2.3</required_version>
+  	<config_file>reload.xml</config_file>
+  	<maintainer>shaun@ghanima.net</maintainer>
+  	<configurationfile>someprogram.xml</configurationfile>
+  </package>
+</pfsensepkgs>
