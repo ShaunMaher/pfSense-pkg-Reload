@@ -41,12 +41,13 @@
      <tooltiptext>Allows an administrator to schedule a configuration rollback</tooltiptext>
      <url>/pkg_edit.php?xml=reload.xml&act=edit&id=0</url>
   </menu>
-  <additional_files_needed>
-     <prefix></prefix>
-     <chmod></chmod>
-     <item></item>
-  </additional_files_needed>
   <fields>
+    <field>
+       <fielddescr>Status</fielddescr>
+       <fieldname>reload_status</fieldname>
+       <type>info</type>
+       <description>Can we use this to show the amount of time remaining before reload?</description>
+     </field>
     <field>
      <fielddescr>Delay before reload</fielddescr>
      <fieldname>reload_delay</fieldname>
@@ -74,6 +75,20 @@
 			<source_name>name</source_name>
 			<source_value>value</source_value>
 			<description>Configuration Version</description>
+    </field>
+    <field>
+     <fielddescr>Start Timer</fielddescr>
+     <fieldname>reload_start</fieldname>
+     <type>button</type>
+     <description>Start the reload timer</description>
+     <placeonbottom/>
+    </field>
+    <field>
+     <fielddescr>Abort Timer</fielddescr>
+     <fieldname>reload_abort</fieldname>
+     <type>button</type>
+     <description>Stop the reload timer and do not reload</description>
+     <placeonbottom/>
     </field>
   </fields>
   <custom_php_global_functions>      </custom_php_global_functions>
