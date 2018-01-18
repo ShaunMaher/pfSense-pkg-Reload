@@ -24,4 +24,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
- ?>
+
+function reload_install_command() {
+ 	$crontask = "/usr/bin/nice -n20 " . SYSLOGNG_BASEDIR . "sbin/logrotate /usr/local/etc/logrotate.conf";
+ 	install_cron_job("${crontask}", true, "0");
+ 	syslogng_resync();
+}
+
+function reload_deinstall_command() {
+	$crontask = "/usr/bin/nice -n20 " . SYSLOGNG_BASEDIR . "sbin/logrotate /usr/local/etc/logrotate.conf";
+	install_cron_job("${crontask}", false);
+	filter_configure();
+}
+
+function reload_get_configversions() {
+	$tmp["name"] = "{$gateway['name']} (Monitor: {$gateway['monitor']})";
+	$tmp["value"] = $gateway['name'];
+	$gws[] = $tmp;
+	return $gws;
+}
+
+?>

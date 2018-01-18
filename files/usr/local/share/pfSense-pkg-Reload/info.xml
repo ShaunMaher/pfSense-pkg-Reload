@@ -9,8 +9,7 @@
   	<version>%%PKGVERSION%%</version>
   	<status>Alpha</status>
   	<required_version>2.3</required_version>
-  	<config_file>reload.xml</config_file>
   	<maintainer>shaun@ghanima.net</maintainer>
-  	<configurationfile>someprogram.xml</configurationfile>
+  	<configurationfile>reload.xml</configurationfile>
   </package>
 </pfsensepkgs>

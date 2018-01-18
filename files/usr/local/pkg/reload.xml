@@ -41,42 +41,48 @@
      <tooltiptext>Allows an administrator to schedule a configuration rollback</tooltiptext>
      <url>/pkg_edit.php?xml=reload.xml&act=edit&id=0</url>
   </menu>
-  <service>
-     <name>Reload</name>
-     <rcfile></rcfile>
-     <executable></executable>
-  </service>
-  <tabs>
-     <tab>
-        <text></text>
-        <url></url>
-        <active/>
-        <tab_level/>
-     </tab>
-  </tabs>
   <additional_files_needed>
      <prefix></prefix>
      <chmod></chmod>
      <item></item>
   </additional_files_needed>
-  <adddeleteeditpagefields>
-     <columnitem>
-        <fielddescr></fielddescr>
-        <fieldname></fieldname>
-     </columnitem>
-  </adddeleteeditpagefields>
   <fields>
-     <field>
-        <fielddescr></fielddescr>
-        <fieldname></fieldname>
-        <description></description>
-        <size></size>
-        <type></type>
-     </field>
+    <field>
+     <fielddescr>Delay before reload</fielddescr>
+     <fieldname>reload_delay</fieldname>
+     <description>Select the frequency to archive (rotate) log files</description>
+     <type>select</type>
+     <value>10</value>
+     <options>
+       <option><name>2 Minutes</name><value>2</value></option>
+       <option><name>5 Minutes</name><value>5</value></option>
+       <option><name>10 Minutes</name><value>10</value></option>
+       <option><name>20 Minutes</name><value>20</value></option>
+       <option><name>30 Minutes</name><value>30</value></option>
+       <option><name>45 Minutes</name><value>45</value></option>
+       <option><name>1 Hour</name><value>60</value></option>
+       <option><name>1.5 Hours</name><value>90</value></option>
+       <option><name>2 Hours</name><value>120</value></option>
+     </options>
+     <required/>
+   </field>
+   <field>
+			<fielddescr>Configuration Version</fielddescr>
+			<fieldname>config_version</fieldname>
+			<type>select_source</type>
+			<source><![CDATA[reload_get_configversions()]]></source>
+			<source_name>name</source_name>
+			<source_value>value</source_value>
+			<description>Configuration Version</description>
+    </field>
   </fields>
   <custom_php_global_functions>      </custom_php_global_functions>
-  <custom_php_install_command>       </custom_php_install_command>
-  <custom_php_deinstall_command>      </custom_php_deinstall_command>
+  <custom_php_install_command>
+		reload_install_command();
+  </custom_php_install_command>
+  <custom_php_deinstall_command>
+		reload_deinstall_command();
+  </custom_php_deinstall_command>
   <custom_add_php_command>      </custom_add_php_command>
   <custom_add_php_command_late>      </custom_add_php_command_late>
   <custom_delete_php_command>      </custom_delete_php_command>
