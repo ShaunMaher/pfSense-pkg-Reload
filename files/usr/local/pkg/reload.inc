@@ -26,22 +26,39 @@
  */
 
 function reload_install_command() {
+  /* Create a cron task that runs every minute to check to see is a reload
+     should be triggered */
  	$crontask = "/usr/bin/nice -n20 " . SYSLOGNG_BASEDIR . "sbin/logrotate /usr/local/etc/logrotate.conf";
  	install_cron_job("${crontask}", true, "0");
- 	syslogng_resync();
 }
 
 function reload_deinstall_command() {
+  /* Remove the cron task we created during installation */
 	$crontask = "/usr/bin/nice -n20 " . SYSLOGNG_BASEDIR . "sbin/logrotate /usr/local/etc/logrotate.conf";
 	install_cron_job("${crontask}", false);
-	filter_configure();
 }
 
+/*
+ Generates a list of available confif file versions available in TODO
+ @returns [name => value] Returns an associative array for creation of <options/> elements
+*/
+
 function reload_get_configversions() {
-	$tmp["name"] = "{$gateway['name']} (Monitor: {$gateway['monitor']})";
-	$tmp["value"] = $gateway['name'];
-	$gws[] = $tmp;
-	return $gws;
+  $entries = [];
+  if ($dirhandle = opendir('/conf/backup')) {
+    while (false !== ($entry = readdir($dirhandle))) {
+      $tmp["name"] = $entry;
+      $tmp["value"] = $entry;
+      $entries[] = $tmp;
+    }
+
+    closedir($handle);
+  }
+
+	#$tmp["name"] = "{$gateway['name']} (Monitor: {$gateway['monitor']})";
+	#$tmp["value"] = $gateway['name'];
+	#$gws[] = $tmp;
+	return $entries;
 }
 
 ?>
