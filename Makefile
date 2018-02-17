@@ -24,23 +24,13 @@ do-extract:
 
 do-install:
 	${MKDIR} ${STAGEDIR}${PREFIX}/pkg
-	${MKDIR} ${STAGEDIR}/etc/inc/priv
-	${MKDIR} ${STAGEDIR}${PREFIX}/www/packages/cron
 	${MKDIR} ${STAGEDIR}${DATADIR}
-	${INSTALL_DATA} -m 0644 ${FILESDIR}${PREFIX}/pkg/cron.xml \
+	${INSTALL_DATA} -m 0644 ${FILESDIR}${PREFIX}/pkg/reload.xml \
 		${STAGEDIR}${PREFIX}/pkg
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/cron.xml \
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/reload.xml \
 		${STAGEDIR}${PREFIX}/pkg
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/cron.inc \
+	${INSTALL_DATA} ${FILESDIR}${PREFIX}/pkg/reload.inc \
 		${STAGEDIR}${PREFIX}/pkg
-	${INSTALL_DATA} ${FILESDIR}/etc/inc/priv/cron.priv.inc \
-		${STAGEDIR}/etc/inc/priv
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/packages/cron/cron.php \
-		${STAGEDIR}${PREFIX}/www/packages/cron
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/packages/cron/cron_edit.php \
-		${STAGEDIR}${PREFIX}/www/packages/cron
-	${INSTALL_DATA} ${FILESDIR}${PREFIX}/www/packages/cron/index.php \
-		${STAGEDIR}${PREFIX}/www/packages/cron
 	${INSTALL_DATA} ${FILESDIR}${DATADIR}/info.xml \
 		${STAGEDIR}${DATADIR}
 	@${REINPLACE_CMD} -i '' -e "s|%%PKGVERSION%%|${PKGVERSION}|" \
