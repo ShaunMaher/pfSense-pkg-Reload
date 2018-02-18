@@ -32,14 +32,14 @@
     ]]>
   </copyright>
   <name>Reload</name>
-  <title>Services: Reload</title>
+  <title>System: Reload</title>
   <include_file>/usr/local/pkg/reload.inc</include_file>
   <menu>
      <name>Reload</name>
-     <section>Services</section>
+     <section>System</section>
      <configfile>reload.xml</configfile>
      <tooltiptext>Allows an administrator to schedule a configuration rollback</tooltiptext>
-     <url>/pkg_edit.php?xml=reload.xml&act=edit&id=0</url>
+     <url>/pkg_edit.php?xml=reload.xml&amp;act=edit&amp;id=0</url>
   </menu>
   <fields>
     <field>
