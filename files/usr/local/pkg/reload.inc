@@ -28,13 +28,15 @@
 function reload_install_command() {
   /* Create a cron task that runs every minute to check to see is a reload
      should be triggered */
- 	$crontask = "/usr/bin/nice -n20 " . SYSLOGNG_BASEDIR . "sbin/logrotate /usr/local/etc/logrotate.conf";
- 	install_cron_job("${crontask}", true, "0");
+ 	$crontask = "/usr/bin/nice -n20 /usr/local/bin/php /usr/local/pkg/reload.inc do_reload";
+
+  //install_cron_job($command, $active = false, $minute = "0", $hour = "*", $monthday = "*", $month = "*", $weekday = "*", $who = "root", $write_config = true)
+ 	install_cron_job("${crontask}", true, "*", "*", "*", "*", "*", "root", true);
 }
 
 function reload_deinstall_command() {
   /* Remove the cron task we created during installation */
-	$crontask = "/usr/bin/nice -n20 " . SYSLOGNG_BASEDIR . "sbin/logrotate /usr/local/etc/logrotate.conf";
+	$crontask = "/usr/bin/nice -n20 /usr/local/bin/php /usr/local/pkg/reload.inc do_reload";
 	install_cron_job("${crontask}", false);
 }
 
@@ -42,23 +44,45 @@ function reload_deinstall_command() {
  Generates a list of available confif file versions available in TODO
  @returns [name => value] Returns an associative array for creation of <options/> elements
 */
-
 function reload_get_configversions() {
+  global $config;
+
+  //TODO: Use "config_backup()" from config.lib.inc instead?
+  write_config("Reload: Save config to create a reload point", true, true);
   $entries = [];
+  $files = [];
+  $tmp["name"] = ">> " . date("r", $config["revision"]["time"]);
+  $tmp["value"] = $config["revision"]["time"];
+  $entries[] = $tmp;
   if ($dirhandle = opendir('/conf/backup')) {
     while (false !== ($entry = readdir($dirhandle))) {
-      $tmp["name"] = $entry;
-      $tmp["value"] = $entry;
-      $entries[] = $tmp;
+      if ((preg_match("/^config/", $entry)) && (preg_match("/xml\$/", $entry))) {
+        $files[] = $entry;
+      }
     }
-
     closedir($handle);
   }
 
-	#$tmp["name"] = "{$gateway['name']} (Monitor: {$gateway['monitor']})";
-	#$tmp["value"] = $gateway['name'];
-	#$gws[] = $tmp;
-	return $entries;
+  sort($files);
+  foreach (array_reverse($files) as $entry) {
+    $entry = explode("-", $entry, 2)[1];
+    $entry = explode(".", $entry, 2)[0];
+    $tmp["name"] = date("r", $entry);
+    $tmp["value"] = $entry;
+    $entries[] = $tmp;
+  }
+  return $entries;
+}
+
+// If we are being executed from cron, there will be an argument set to
+//  "do_reload"
+foreach ($argv as $arg) {
+  if ($arg == "do_reload") {
+    echo "Trigger Reload?\n";
+    require_once("config.inc");
+
+    # See config_restore in config.lib.inc
+  }
 }
 
 ?>
